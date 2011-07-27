@@ -9,13 +9,11 @@ import net.minecraft.src.*;
 
 public class TileWirelessExtractionPipe extends TileExtractionPipe implements IWirelessPipe
 {
-	public Object oldFreq;
 	public Object currentFreq;
 
     public TileWirelessExtractionPipe()
     {
     	super();
-		oldFreq = 0;
 		currentFreq = 0;
     	setPowerProvider(mod_WirelessRedstonePipes.wirelessPowerFramework.createPowerProvider());
     }
@@ -32,8 +30,13 @@ public class TileWirelessExtractionPipe extends TileExtractionPipe implements IW
 
 	@Override
 	public void setFreq(int frequency) {
-		// TODO Auto-generated method stub
-		
+		if (frequency < 0)
+			frequency = 0;
+		if (frequency > 9999)
+			frequency = 9999;
+
+		currentFreq = frequency;
+		updateEntity();
 	}
 
 	@Override

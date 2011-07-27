@@ -13,7 +13,6 @@ public class TileWirelessBouncePipe extends TilePipe implements IWirelessPipe {
 	public static final int TILEPIPE_META_UNPOWERED = 0;
 	public static final int TILEPIPE_META_POWERED = 1;
 
-	public Object oldFreq;
 	public Object currentFreq;
 
 	/**
@@ -21,7 +20,6 @@ public class TileWirelessBouncePipe extends TilePipe implements IWirelessPipe {
 	 */
 	public TileWirelessBouncePipe() {
 		super();
-		oldFreq = 0;
 		currentFreq = 0;
 	}
 
