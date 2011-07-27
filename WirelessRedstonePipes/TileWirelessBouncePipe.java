@@ -1,12 +1,15 @@
 package net.minecraft.src.WirelessRedstonePipes;
 
 import net.minecraft.src.buildcraft.api.*;
-import net.minecraft.src.ExtraBuildcraftPipes.TileBouncePipe;
+import net.minecraft.src.buildcraft.transport.TilePipe;
 import net.minecraft.src.*;
 import java.util.LinkedList;
 
-public class TileWirelessBouncePipe extends TileBouncePipe implements IWireless
+public class TileWirelessBouncePipe extends TilePipe implements IWireless
 {
+	public static final int TILEPIPE_META_UNPOWERED = 0;
+	public static final int TILEPIPE_META_POWERED = 1;
+
 	public Object oldFreq;
 	public Object currentFreq;
 
@@ -17,15 +20,36 @@ public class TileWirelessBouncePipe extends TileBouncePipe implements IWireless
 		currentFreq = 0;
 	}
 	
+	public LinkedList getPossibleMovements(Position position, EntityPassiveItem entitypassiveitem)
+	{
+		LinkedList linkedlist;
+		if(isPowered())
+			linkedlist = super.getPossibleMovements(position, entitypassiveitem);
+		else
+		{
+			linkedlist = new LinkedList();
+			linkedlist.add(position.orientation.reverse());
+		}
+		
+		updatePowerMeta();
+		return linkedlist;
+	}
+	
+	public boolean isPowered()
+	{
+		return (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == TILEPIPE_META_POWERED);
+	}
+	
 	public void updateEntity()
 	{
+		super.updateEntity();
 		updatePowerMeta();
 	}
 
 	private void updatePowerMeta()
 	{
 		boolean newState = RedstoneEther.getInstance().getFreqState(currentFreq);
-		boolean oldState = (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == TILEPIPE_META_POWERED);
+		boolean oldState = isPowered();
 		
 		if(oldState != newState)
 		{
