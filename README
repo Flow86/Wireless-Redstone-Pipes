@@ -30,6 +30,16 @@ R = Wireless Receiver Block
 P = Wooden Planks
 G = Glass
 
+
+Wireless Golden Pipe: 
+
+- - -
+G R G
+- - -
+
+G = Gold Ingot
+R = Wireless Receiver Block
+
 -----------------------------
 
 Changelog:
