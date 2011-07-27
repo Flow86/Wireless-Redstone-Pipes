@@ -2,8 +2,10 @@ package net.minecraft.src;
 
 import net.minecraft.src.WirelessRedstonePipes.BlockWirelessBouncePipe;
 import net.minecraft.src.WirelessRedstonePipes.BlockWirelessExtractionPipe;
+import net.minecraft.src.WirelessRedstonePipes.BlockWirelessGoldenPipe;
 import net.minecraft.src.WirelessRedstonePipes.TileWirelessBouncePipe;
 import net.minecraft.src.WirelessRedstonePipes.TileWirelessExtractionPipe;
+import net.minecraft.src.WirelessRedstonePipes.TileWirelessGoldenPipe;
 import net.minecraft.src.WirelessRedstonePipes.WirelessPowerFramework;
 import net.minecraft.src.buildcraft.core.Configuration;
 import net.minecraft.src.buildcraft.core.CoreProxy;
@@ -22,6 +24,7 @@ public class mod_WirelessRedstonePipes extends BaseModMp {
 
 	public static BlockWirelessBouncePipe wirelessBouncePipeBlock;
 	public static BlockWirelessExtractionPipe wirelessExtractionPipeBlock;
+	public static BlockWirelessGoldenPipe wirelessGoldenPipeBlock;
 	public static WirelessPowerFramework wirelessPowerFramework;
 
 	/**
@@ -50,6 +53,8 @@ public class mod_WirelessRedstonePipes extends BaseModMp {
 				.getOrCreateBlockIdProperty("wirelessBouncePipe", 160);
 		Configuration.Property wirelessExtractionPipeBlockId = this.config
 				.getOrCreateBlockIdProperty("wirelessExtractionPipe", 161);
+		Configuration.Property wirelessGoldenPipeBlockId = this.config
+				.getOrCreateBlockIdProperty("wirelessGoldenPipe", 162);
 
 		this.config.save();
 
@@ -92,6 +97,24 @@ public class mod_WirelessRedstonePipes extends BaseModMp {
 
 		}
 
+		if (Integer.parseInt(wirelessGoldenPipeBlockId.value) != 0) {
+			wirelessGoldenPipeBlock = new BlockWirelessGoldenPipe(
+					Integer.parseInt(wirelessGoldenPipeBlockId.value));
+			CoreProxy.addName(
+					wirelessGoldenPipeBlock.setBlockName("wirelessGoldenPipe"),
+					"Wireless Golden Pipe");
+
+			ModLoader.RegisterBlock(wirelessGoldenPipeBlock);
+
+			ModLoader.AddRecipe(new ItemStack(wirelessGoldenPipeBlock, 8),
+					new Object[] { "PGP", Character.valueOf('P'),
+							Item.ingotGold, Character.valueOf('G'),
+							mod_WirelessRedstone.blockWirelessR });
+
+			ModLoader.RegisterTileEntity(TileWirelessGoldenPipe.class,
+					"WirelessGoldenPipe");
+
+		}
 	}
 
 	/*
@@ -101,6 +124,6 @@ public class mod_WirelessRedstonePipes extends BaseModMp {
 	 */
 	@Override
 	public String Version() {
-		return "1.7.3.0";
+		return "1.7.3.1";
 	}
 }

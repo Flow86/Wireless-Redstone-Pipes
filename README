@@ -1,4 +1,5 @@
 Wireless Redstone Pipes
+-------------------------------------------------------------------------------
 
 Version 1.7.3.0
 
@@ -8,22 +9,36 @@ Buildcraft: http://www.minecraftforum.net/topic/286417-173-buildcraft-1733-pipes
 ExtraBuildcraftPipes: http://www.minecraftforum.net/topic/474348-17331-extrabuildcraftpipes/
 Wireless Redstone: http://www.minecraftforum.net/topic/328725-173wireless-redstone-v14/
 
+-------------------------------------------------------------------------------
 
 Wireless Bounce Pipe: 
 
-_ _ _
+- - -
 C R C
-_ _ _
+- - -
 
 C = Cobblestone
 R = Wireless Receiver Block
 
 Wireless Extraction Pipe: 
 
-_ R _
+- R -
 P G P
-_ _ _
+- - -
 
 R = Wireless Receiver Block
 P = Wooden Planks
 G = Glass
+
+-----------------------------
+
+Changelog:
+
+1.7.3.1 - added Golden Pipe
+- Wireless Golden Pipe
+
+1.7.3.0 - Initial
+- Wireless Bounce Pipe
+- Wireless Extraction Pipe
+
+-------------------------------------------------------------------------------
