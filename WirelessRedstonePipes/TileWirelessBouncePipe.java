@@ -33,7 +33,6 @@ public class TileWirelessBouncePipe extends TilePipe implements IWirelessPipe {
 	 * net.minecraft.src.buildcraft.api.Position,
 	 * net.minecraft.src.buildcraft.api.EntityPassiveItem)
 	 */
-	@SuppressWarnings("unchecked")
 	public LinkedList<Orientations> getPossibleMovements(Position position,
 			EntityPassiveItem entitypassiveitem) {
 		LinkedList<Orientations> linkedlist;

@@ -1,10 +1,10 @@
 package net.minecraft.src.WirelessRedstonePipes;
 
-import org.lwjgl.opengl.GL11;
-import net.minecraft.src.GuiContainer;
 import net.minecraft.src.GuiButton;
+import net.minecraft.src.GuiContainer;
 import net.minecraft.src.IInventory;
-import net.minecraft.src.Container;
+
+import org.lwjgl.opengl.GL11;
 
 /**
  * @author sifldoer

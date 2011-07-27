@@ -3,9 +3,7 @@ package net.minecraft.src;
 import net.minecraft.src.WirelessRedstonePipes.BlockWirelessBouncePipe;
 import net.minecraft.src.WirelessRedstonePipes.TileWirelessBouncePipe;
 import net.minecraft.src.buildcraft.core.Configuration;
-import net.minecraft.src.buildcraft.core.Configuration.Property;
 import net.minecraft.src.buildcraft.core.CoreProxy;
-import net.minecraft.src.BlockRedstoneWirelessR;
 import java.io.File;
 
 /**
