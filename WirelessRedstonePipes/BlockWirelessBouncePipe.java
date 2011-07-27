@@ -21,7 +21,7 @@ public class BlockWirelessBouncePipe extends BlockBouncePipe
 		
 		TileEntity tileentity = world.getBlockTileEntity(i, j, k);
 
-		if ( tileentity instanceof TileWirelessBouncePipe ) 
+		if ( tileentity instanceof IWireless ) 
 			ModLoader.OpenGUI(entityplayer, new GuiWireless(entityplayer.inventory, (TileWirelessBouncePipe)tileentity));
 		
 		return true;

@@ -2,49 +2,26 @@ package net.minecraft.src.WirelessRedstonePipes;
 
 import net.minecraft.src.buildcraft.api.*;
 import net.minecraft.src.ExtraBuildcraftPipes.TileBouncePipe;
-import net.minecraft.src.RedstoneEther;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IInventory;
-import net.minecraft.src.World;
-import net.minecraft.src.ItemStack;
+import net.minecraft.src.*;
 import java.util.LinkedList;
 
-public class TileWirelessBouncePipe extends TileBouncePipe implements IInventory
+public class TileWirelessBouncePipe extends TileBouncePipe implements IWireless
 {
+	public Object oldFreq;
+	public Object currentFreq;
+
 	public TileWirelessBouncePipe()
 	{
 		super();
 		oldFreq = 0;
 		currentFreq = 0;
 	}
-
-	public Object oldFreq;
-	public Object currentFreq;
-
-	public Object getFreq() {
-		return currentFreq;
-	}
 	
-	public void setFreq(int freq) {
-		if ( freq < 0 )
-			freq = 0;
-		if ( freq > 9999 ) 
-			freq = 9999;
-		
-		currentFreq = freq;
-		updateEntity();
-	}
-	
-	public String getInvName() {
-		return "Wireless Bounce Pipe";
-	}	
-	
-	public void updateEntity() {
-		// TODO: change freq
-		
+	public void updateEntity()
+	{
 		updatePowerMeta();
 	}
-	
+
 	private void updatePowerMeta()
 	{
 		boolean newState = RedstoneEther.getInstance().getFreqState(currentFreq);
@@ -57,31 +34,54 @@ public class TileWirelessBouncePipe extends TileBouncePipe implements IInventory
 			worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
 		}
 	}
+
+	public void readFromNBT(NBTTagCompound nbttagcompound) {
+		super.readFromNBT(nbttagcompound);
+		
+		NBTTagList nbttaglist3 = nbttagcompound.getTagList("Frequency");
+		NBTTagCompound nbttagcompound3 = (NBTTagCompound)nbttaglist3.tagAt(0);
+		try {
+			String freq = nbttagcompound3.getString("freq");
+			try {
+				currentFreq = Integer.parseInt(freq);
+			} catch(NumberFormatException e) {
+				currentFreq = freq;
+			}
+		} catch (ClassCastException e) {
+			currentFreq = nbttagcompound3.getInteger("freq");
+		}
+	}
+	
+	public void writeToNBT(NBTTagCompound nbttagcompound) {
+		super.writeToNBT(nbttagcompound);
+		
+		NBTTagList nbttaglist3 = new NBTTagList();
+		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+		nbttagcompound1.setString("freq", currentFreq.toString());
+		nbttaglist3.setTag(nbttagcompound1);
+		nbttagcompound.setTag("Frequency", nbttaglist3);
+	}
+
+	@Override
+	public Object getFreq() {
+		return currentFreq;
+	}
 	
 	@Override
-	public int getSizeInventory() {
-		return 0;
+	public void setFreq(int frequency) {
+		if ( frequency < 0 )
+			frequency = 0;
+		if ( frequency > 9999 ) 
+			frequency = 9999;
+		
+		currentFreq = frequency;
+		updateEntity();
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int i) {
-		return null;
+	public String getInvName() {
+		return "Wireless Bounce Pipe";
 	}
-		
-	@Override
-	public ItemStack decrStackSize(int i, int j) {
-		return null;
-	}
-
-	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) {
-		onInventoryChanged();
-	}
-		
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}	
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {

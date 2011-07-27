@@ -5,9 +5,9 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
 
 public class ContainerWireless extends Container {
-	protected IInventory tile;
+	protected IWireless tile;
 	
-	public ContainerWireless(IInventory iinventory, IInventory tileentity) {
+	public ContainerWireless(IInventory iinventory, IWireless tileentity) {
 		tile = tileentity;
 	}
 	

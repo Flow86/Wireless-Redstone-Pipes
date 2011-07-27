@@ -7,9 +7,9 @@ import net.minecraft.src.IInventory;
 import net.minecraft.src.Container;
 
 public class GuiWireless extends GuiContainer {
-	protected TileWirelessBouncePipe tile;
+	protected IWireless tile;
 	
-	public GuiWireless(IInventory inventory, TileWirelessBouncePipe tileentity) {
+	public GuiWireless(IInventory inventory, IWireless tileentity) {
 		super(new ContainerWireless(inventory, tileentity));
 		tile = tileentity;
 	}
@@ -121,8 +121,7 @@ public class GuiWireless extends GuiContainer {
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f) {
-		// /net/minecraft/src/WirelessRedstonePipes
-		int i = mc.renderEngine.getTexture("/gui/wifi_small.png");
+		int i = mc.renderEngine.getTexture("/net/minecraft/src/WirelessRedstonePipes/gui/wifi_small.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(i);
 		int j = (width - xSize) / 2;
