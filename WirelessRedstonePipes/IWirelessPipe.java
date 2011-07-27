@@ -12,6 +12,8 @@ public interface IWirelessPipe {
 	public abstract Object getFreq();
 
 	public abstract void setFreq(int frequency);
+	
+	public abstract boolean isPowered();
 
 	public abstract boolean canInteractWith(EntityPlayer entityplayer);
 }

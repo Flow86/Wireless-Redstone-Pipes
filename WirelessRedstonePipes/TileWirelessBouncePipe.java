@@ -48,16 +48,17 @@ public class TileWirelessBouncePipe extends TilePipe implements IWirelessPipe {
 		return linkedlist;
 	}
 
-	/**
-	 * @return
+	/* 
+	 * (non-Javadoc)
+	 * @see net.minecraft.src.WirelessRedstonePipes.IWirelessPipe#isPowered()
 	 */
+	@Override
 	public boolean isPowered() {
-		return (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == TILEPIPE_META_POWERED);
+		return RedstoneEther.getInstance().getFreqState(currentFreq);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.minecraft.src.buildcraft.transport.TilePipe#updateEntity()
 	 */
 	public void updateEntity() {
@@ -71,7 +72,7 @@ public class TileWirelessBouncePipe extends TilePipe implements IWirelessPipe {
 	private void updatePowerMeta() {
 		boolean newState = RedstoneEther.getInstance()
 				.getFreqState(currentFreq);
-		boolean oldState = isPowered();
+		boolean oldState = (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == TILEPIPE_META_POWERED);
 
 		if (oldState != newState) {
 			int state = newState ? TILEPIPE_META_POWERED

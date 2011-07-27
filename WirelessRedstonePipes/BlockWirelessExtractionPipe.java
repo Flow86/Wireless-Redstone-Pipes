@@ -1,35 +1,38 @@
 package net.minecraft.src.WirelessRedstonePipes;
 
-import net.minecraft.src.ExtraBuildcraftPipes.BlockBouncePipe;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ModLoader;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
+import net.minecraft.src.ExtraBuildcraftPipes.BlockExtractionPipe;
 
 /**
  * @author sifldoer
- * 
+ *
  */
-public class BlockWirelessBouncePipe extends BlockBouncePipe {
-	/**
-	 * @param i
-	 */
-	public BlockWirelessBouncePipe(int i) {
-		super(i);
-	}
+public class BlockWirelessExtractionPipe extends BlockExtractionPipe
+{
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * net.minecraft.src.ExtraBuildcraftPipes.BlockBouncePipe#getBlockEntity()
-	 */
-	protected TileEntity getBlockEntity() {
-		return new TileWirelessBouncePipe();
-	}
+    /**
+     * @param i
+     */
+    public BlockWirelessExtractionPipe(int i)
+    {
+        super(i);
+    }
+
+    /* (non-Javadoc)
+     * @see net.minecraft.src.ExtraBuildcraftPipes.BlockExtractionPipe#getBlockEntity()
+     */
+    protected TileEntity getBlockEntity()
+    {
+        return new TileWirelessExtractionPipe();
+    }
 
 	/*
 	 * Block was activated by player.
 	 * 
 	 * (non-Javadoc)
-	 * 
 	 * @see net.minecraft.src.Block#blockActivated(net.minecraft.src.World, int,
 	 * int, int, net.minecraft.src.EntityPlayer)
 	 */

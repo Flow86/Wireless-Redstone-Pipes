@@ -1,9 +1,14 @@
 package net.minecraft.src;
 
 import net.minecraft.src.WirelessRedstonePipes.BlockWirelessBouncePipe;
+import net.minecraft.src.WirelessRedstonePipes.BlockWirelessExtractionPipe;
 import net.minecraft.src.WirelessRedstonePipes.TileWirelessBouncePipe;
+import net.minecraft.src.WirelessRedstonePipes.TileWirelessExtractionPipe;
+import net.minecraft.src.WirelessRedstonePipes.WirelessPowerFramework;
 import net.minecraft.src.buildcraft.core.Configuration;
 import net.minecraft.src.buildcraft.core.CoreProxy;
+import net.minecraft.src.buildcraft.core.PowerFramework;
+
 import java.io.File;
 
 /**
@@ -16,6 +21,8 @@ public class mod_WirelessRedstonePipes extends BaseModMp {
 	private Configuration config;
 
 	public static BlockWirelessBouncePipe wirelessBouncePipeBlock;
+	public static BlockWirelessExtractionPipe wirelessExtractionPipeBlock;
+	public static WirelessPowerFramework wirelessPowerFramework;
 
 	/**
 	 * 
@@ -34,11 +41,15 @@ public class mod_WirelessRedstonePipes extends BaseModMp {
 
 		mod_BuildCraftCore.initialize();
 
+		wirelessPowerFramework = new WirelessPowerFramework();
+
 		this.config = new Configuration(new File(CoreProxy.getBuildCraftBase(),
 				"config/wirelessredstonepipes.cfg"), false);
 
 		Configuration.Property wirelessBouncePipeBlockId = this.config
 				.getOrCreateBlockIdProperty("wirelessBouncePipe", 160);
+		Configuration.Property wirelessExtractionPipeBlockId = this.config
+				.getOrCreateBlockIdProperty("wirelessExtractionPipe", 161);
 
 		this.config.save();
 
@@ -48,9 +59,9 @@ public class mod_WirelessRedstonePipes extends BaseModMp {
 			CoreProxy.addName(
 					wirelessBouncePipeBlock.setBlockName("wirelessBouncePipe"),
 					"Wireless Bounce Pipe");
-			
+
 			ModLoader.RegisterBlock(wirelessBouncePipeBlock);
-			
+
 			ModLoader.AddRecipe(new ItemStack(wirelessBouncePipeBlock, 8),
 					new Object[] { "CSC", Character.valueOf('C'),
 							Block.cobblestone, Character.valueOf('S'),
@@ -58,6 +69,27 @@ public class mod_WirelessRedstonePipes extends BaseModMp {
 
 			ModLoader.RegisterTileEntity(TileWirelessBouncePipe.class,
 					"WirelessBouncePipe");
+
+		}
+
+		if (Integer.parseInt(wirelessExtractionPipeBlockId.value) != 0) {
+			wirelessExtractionPipeBlock = new BlockWirelessExtractionPipe(
+					Integer.parseInt(wirelessExtractionPipeBlockId.value));
+			CoreProxy.addName(wirelessExtractionPipeBlock
+					.setBlockName("wirelessExtractionPipe"),
+					"Wireless Extraction Pipe");
+
+			ModLoader.RegisterBlock(wirelessExtractionPipeBlock);
+
+			ModLoader.AddRecipe(new ItemStack(wirelessExtractionPipeBlock, 8),
+					new Object[] { " R ", "WGW", Character.valueOf('W'),
+							Block.planks, Character.valueOf('G'), Block.glass,
+							Character.valueOf('R'),
+							mod_WirelessRedstone.blockWirelessR });
+
+			ModLoader.RegisterTileEntity(TileWirelessExtractionPipe.class,
+					"WirelessExtractionPipe");
+
 		}
 
 	}
