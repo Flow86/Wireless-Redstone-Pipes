@@ -7,3 +7,23 @@ Depends on: Buildcraft Core / Transport, ExtraBuildcraftPipes AND Wireless Redst
 Buildcraft: http://www.minecraftforum.net/topic/286417-173-buildcraft-1733-pipes-quarry-auto-crafting-and-building/
 ExtraBuildcraftPipes: http://www.minecraftforum.net/topic/474348-17331-extrabuildcraftpipes/
 Wireless Redstone: http://www.minecraftforum.net/topic/328725-173wireless-redstone-v14/
+
+
+Wireless Bounce Pipe: 
+
+_ _ _
+C R C
+_ _ _
+
+C = Cobblestone
+R = Wireless Receiver Block
+
+Wireless Extraction Pipe: 
+
+_ R _
+P G P
+_ _ _
+
+R = Wireless Receiver Block
+P = Wooden Planks
+G = Glass
