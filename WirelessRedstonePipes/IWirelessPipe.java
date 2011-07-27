@@ -2,11 +2,15 @@ package net.minecraft.src.WirelessRedstonePipes;
 
 import net.minecraft.src.EntityPlayer;
 
-public interface IWireless
-{
+/**
+ * @author sifldoer
+ * 
+ */
+public interface IWirelessPipe {
 	public abstract String getInvName();
 
 	public abstract Object getFreq();
+
 	public abstract void setFreq(int frequency);
 
 	public abstract boolean canInteractWith(EntityPlayer entityplayer);
