@@ -5,6 +5,7 @@
 package net.minecraft.src.WirelessRedstonePipes;
 
 import net.minecraft.src.ExtraBuildcraftPipes.TileExtractionPipe;
+import net.minecraft.src.buildcraft.core.PowerProvider;
 import net.minecraft.src.*;
 
 public class TileWirelessExtractionPipe extends TileExtractionPipe implements IWirelessPipe
@@ -15,7 +16,10 @@ public class TileWirelessExtractionPipe extends TileExtractionPipe implements IW
     {
     	super();
 		currentFreq = 0;
-    	setPowerProvider(mod_WirelessRedstonePipes.wirelessPowerFramework.createPowerProvider());
+		
+		PowerProvider powerProvider = mod_WirelessRedstonePipes.wirelessPowerFramework.createPowerProvider();
+		powerProvider.configure(50, 1, 1, 1, 64);
+    	setPowerProvider(powerProvider);
     }
 
 	@Override
