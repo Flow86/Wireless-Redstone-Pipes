@@ -11,12 +11,30 @@ import net.minecraft.src.buildcraft.core.PowerProvider;
  * 
  */
 public class TileWirelessExtractionPipe extends TileExtractionPipe implements IWirelessPipe {
+	private WirelessFrequencer frequencer;
+
+	/**
+	 * 
+	 */
 	public TileWirelessExtractionPipe() {
 		super();
 
 		PowerProvider powerProvider = mod_WirelessRedstonePipes.wirelessPowerFramework.createPowerProvider();
 		powerProvider.configure(50, 1, 1, 1, 64);
 		setPowerProvider(powerProvider);
+
+		frequencer = new WirelessFrequencer();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.minecraft.src.WirelessRedstonePipes.IWirelessPipe#getFrequencer()
+	 */
+	@Override
+	public WirelessFrequencer getFrequencer() {
+		return frequencer;
 	}
 
 	/*
@@ -38,7 +56,7 @@ public class TileWirelessExtractionPipe extends TileExtractionPipe implements IW
 	 */
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		super.readFromNBT(nbttagcompound);
-		frequencer.readFromNBT(nbttagcompound);
+		getFrequencer().readFromNBT(nbttagcompound);
 	}
 
 	/*
@@ -50,7 +68,7 @@ public class TileWirelessExtractionPipe extends TileExtractionPipe implements IW
 	 */
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
 		super.writeToNBT(nbttagcompound);
-		frequencer.writeToNBT(nbttagcompound);
+		getFrequencer().writeToNBT(nbttagcompound);
 	}
 
 	/*
@@ -62,6 +80,6 @@ public class TileWirelessExtractionPipe extends TileExtractionPipe implements IW
 	 */
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return frequencer.canInteractWith(this, entityplayer);
+		return getFrequencer().canInteractWith(this, entityplayer);
 	}
 }

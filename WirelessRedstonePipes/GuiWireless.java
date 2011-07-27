@@ -49,10 +49,10 @@ public class GuiWireless extends GuiContainer {
 		super.drawScreen(i, j, f);
 
 		GL11.glDisable(2896 /* GL_LIGHTING */);
-		drawStringBorder((width / 2) - (fontRenderer.getStringWidth(tile.frequencer.getFreq() + "") / 2), (height / 2) - 35,
-				(width / 2) + (fontRenderer.getStringWidth(tile.frequencer.getFreq() + "") / 2));
+		drawStringBorder((width / 2) - (fontRenderer.getStringWidth(tile.getFrequencer().getFreq() + "") / 2), (height / 2) - 35,
+				(width / 2) + (fontRenderer.getStringWidth(tile.getFrequencer().getFreq() + "") / 2));
 
-		fontRenderer.drawString(tile.frequencer.getFreq() + "", (width / 2) - (fontRenderer.getStringWidth(tile.frequencer.getFreq() + "") / 2),
+		fontRenderer.drawString(tile.getFrequencer().getFreq() + "", (width / 2) - (fontRenderer.getStringWidth(tile.getFrequencer().getFreq() + "") / 2),
 				(height / 2) - 35, 0x404040);
 		GL11.glEnable(2896 /* GL_LIGHTING */);
 	}
@@ -64,8 +64,8 @@ public class GuiWireless extends GuiContainer {
 	 * net.minecraft.src.GuiScreen#actionPerformed(net.minecraft.src.GuiButton)
 	 */
 	protected void actionPerformed(GuiButton guibutton) {
-		Object a = tile.frequencer.getFreq();
-		Object b = tile.frequencer.getFreq();
+		Object a = tile.getFrequencer().getFreq();
+		Object b = tile.getFrequencer().getFreq();
 		int freq, oldFreq;
 		try {
 			freq = Integer.parseInt(a.toString());
@@ -106,7 +106,7 @@ public class GuiWireless extends GuiContainer {
 			freq += 10000;
 
 		if (oldFreq != freq)
-			tile.frequencer.setFreq(tile, freq);
+			tile.getFrequencer().setFreq(tile, freq);
 	}
 
 	/**

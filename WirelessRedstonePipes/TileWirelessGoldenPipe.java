@@ -15,6 +15,27 @@ public class TileWirelessGoldenPipe extends TileGoldenPipe implements IWirelessP
 	public static final int TILEPIPE_META_UNPOWERED = 0;
 	public static final int TILEPIPE_META_POWERED = 1;
 
+	private WirelessFrequencer frequencer;
+
+	/**
+	 * 
+	 */
+	TileWirelessGoldenPipe() {
+		super();
+		frequencer = new WirelessFrequencer();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.minecraft.src.WirelessRedstonePipes.IWirelessPipe#getFrequencer()
+	 */
+	@Override
+	public WirelessFrequencer getFrequencer() {
+		return frequencer;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -29,7 +50,7 @@ public class TileWirelessGoldenPipe extends TileGoldenPipe implements IWirelessP
 	 * 
 	 */
 	private void updatePowerMeta() {
-		boolean newState = frequencer.isPowered();
+		boolean newState = getFrequencer().isPowered();
 		boolean oldState = (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == TILEPIPE_META_POWERED);
 
 		if (oldState != newState) {
@@ -43,7 +64,7 @@ public class TileWirelessGoldenPipe extends TileGoldenPipe implements IWirelessP
 	 * @param orientation
 	 */
 	public void entityEntering(EntityPassiveItem item, Orientations orientation) {
-		if (frequencer.isPowered())
+		if (getFrequencer().isPowered())
 			item.speed = Utils.pipeNormalSpeed * 20F;
 
 		super.entityEntering(item, orientation);
@@ -63,7 +84,7 @@ public class TileWirelessGoldenPipe extends TileGoldenPipe implements IWirelessP
 	 */
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		super.readFromNBT(nbttagcompound);
-		frequencer.readFromNBT(nbttagcompound);
+		getFrequencer().readFromNBT(nbttagcompound);
 	}
 
 	/*
@@ -75,7 +96,7 @@ public class TileWirelessGoldenPipe extends TileGoldenPipe implements IWirelessP
 	 */
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
 		super.writeToNBT(nbttagcompound);
-		frequencer.writeToNBT(nbttagcompound);
+		getFrequencer().writeToNBT(nbttagcompound);
 	}
 
 	/*
@@ -87,6 +108,6 @@ public class TileWirelessGoldenPipe extends TileGoldenPipe implements IWirelessP
 	 */
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return frequencer.canInteractWith(this, entityplayer);
+		return getFrequencer().canInteractWith(this, entityplayer);
 	}
 }

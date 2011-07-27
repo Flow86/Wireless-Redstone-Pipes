@@ -16,6 +16,26 @@ import net.minecraft.src.buildcraft.transport.TilePipe;
 public class TileWirelessBouncePipe extends TilePipe implements IWirelessPipe {
 	public static final int TILEPIPE_META_UNPOWERED = 0;
 	public static final int TILEPIPE_META_POWERED = 1;
+	private WirelessFrequencer frequencer;
+
+	/**
+	 * 
+	 */
+	TileWirelessBouncePipe() {
+		super();
+		frequencer = new WirelessFrequencer();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.minecraft.src.WirelessRedstonePipes.IWirelessPipe#getFrequencer()
+	 */
+	@Override
+	public WirelessFrequencer getFrequencer() {
+		return frequencer;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -27,7 +47,7 @@ public class TileWirelessBouncePipe extends TilePipe implements IWirelessPipe {
 	 */
 	public LinkedList<Orientations> getPossibleMovements(Position position, EntityPassiveItem entitypassiveitem) {
 		LinkedList<Orientations> linkedlist;
-		if (frequencer.isPowered())
+		if (getFrequencer().isPowered())
 			linkedlist = super.getPossibleMovements(position, entitypassiveitem);
 		else {
 			linkedlist = new LinkedList<Orientations>();
@@ -52,7 +72,7 @@ public class TileWirelessBouncePipe extends TilePipe implements IWirelessPipe {
 	 * 
 	 */
 	private void updatePowerMeta() {
-		boolean newState = frequencer.isPowered();
+		boolean newState = getFrequencer().isPowered();
 		boolean oldState = (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == TILEPIPE_META_POWERED);
 
 		if (oldState != newState) {
@@ -81,7 +101,7 @@ public class TileWirelessBouncePipe extends TilePipe implements IWirelessPipe {
 	 */
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		super.readFromNBT(nbttagcompound);
-		frequencer.readFromNBT(nbttagcompound);
+		getFrequencer().readFromNBT(nbttagcompound);
 	}
 
 	/*
@@ -93,7 +113,7 @@ public class TileWirelessBouncePipe extends TilePipe implements IWirelessPipe {
 	 */
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
 		super.writeToNBT(nbttagcompound);
-		frequencer.writeToNBT(nbttagcompound);
+		getFrequencer().writeToNBT(nbttagcompound);
 	}
 
 	/*
@@ -105,6 +125,6 @@ public class TileWirelessBouncePipe extends TilePipe implements IWirelessPipe {
 	 */
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return frequencer.canInteractWith(this, entityplayer);
+		return getFrequencer().canInteractWith(this, entityplayer);
 	}
 }

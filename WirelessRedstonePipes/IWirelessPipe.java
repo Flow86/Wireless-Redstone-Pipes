@@ -8,7 +8,7 @@ import net.minecraft.src.NBTTagCompound;
  * 
  */
 public interface IWirelessPipe {
-	public WirelessFrequencer frequencer = new WirelessFrequencer();
+	public WirelessFrequencer getFrequencer();
 
 	public abstract String getInvName();
 
