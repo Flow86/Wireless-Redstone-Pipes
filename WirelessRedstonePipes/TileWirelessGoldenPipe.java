@@ -25,6 +25,29 @@ public class TileWirelessGoldenPipe extends TileGoldenPipe implements
 		currentFreq = 0;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see net.minecraft.src.buildcraft.transport.TilePipe#updateEntity()
+	 */
+	public void updateEntity() {
+		super.updateEntity();
+		updatePowerMeta();
+	}
+
+	/**
+	 * 
+	 */
+	private void updatePowerMeta() {
+		boolean newState = RedstoneEther.getInstance()
+				.getFreqState(currentFreq);
+		boolean oldState = (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 1);
+
+		if (oldState != newState) {
+			worldObj.setBlockMetadata(xCoord, yCoord, zCoord, newState ? 1 : 0);
+			worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+		}
+	}	
+	
 	/**
 	 * @param item
 	 * @param orientation
