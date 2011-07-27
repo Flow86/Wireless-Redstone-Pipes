@@ -1,59 +1,67 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode 
-
 package net.minecraft.src.WirelessRedstonePipes;
 
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.mod_WirelessRedstonePipes;
 import net.minecraft.src.ExtraBuildcraftPipes.TileExtractionPipe;
 import net.minecraft.src.buildcraft.core.PowerProvider;
-import net.minecraft.src.*;
 
-public class TileWirelessExtractionPipe extends TileExtractionPipe implements IWirelessPipe
-{
-	public Object currentFreq;
+/**
+ * @author sifldoer
+ * 
+ */
+public class TileWirelessExtractionPipe extends TileExtractionPipe implements IWirelessPipe {
+	public TileWirelessExtractionPipe() {
+		super();
 
-    public TileWirelessExtractionPipe()
-    {
-    	super();
-		currentFreq = 0;
-		
 		PowerProvider powerProvider = mod_WirelessRedstonePipes.wirelessPowerFramework.createPowerProvider();
 		powerProvider.configure(50, 1, 1, 1, 64);
-    	setPowerProvider(powerProvider);
-    }
+		setPowerProvider(powerProvider);
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.minecraft.src.WirelessRedstonePipes.IWirelessPipe#getInvName()
+	 */
 	@Override
 	public String getInvName() {
 		return "Wireless Extraction Pipe";
 	}
 
-	@Override
-	public Object getFreq() {
-		return currentFreq;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.minecraft.src.buildcraft.transport.TilePipe#readFromNBT(net.minecraft
+	 * .src.NBTTagCompound)
+	 */
+	public void readFromNBT(NBTTagCompound nbttagcompound) {
+		super.readFromNBT(nbttagcompound);
+		frequencer.readFromNBT(nbttagcompound);
 	}
 
-	@Override
-	public void setFreq(int frequency) {
-		if (frequency < 0)
-			frequency = 0;
-		if (frequency > 9999)
-			frequency = 9999;
-
-		currentFreq = frequency;
-		updateEntity();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.minecraft.src.buildcraft.transport.TilePipe#writeToNBT(net.minecraft
+	 * .src.NBTTagCompound)
+	 */
+	public void writeToNBT(NBTTagCompound nbttagcompound) {
+		super.writeToNBT(nbttagcompound);
+		frequencer.writeToNBT(nbttagcompound);
 	}
 
-	@Override
-	public boolean isPowered() {
-		return RedstoneEther.getInstance().getFreqState(currentFreq);
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.minecraft.src.WirelessRedstonePipes.IWirelessPipe#canInteractWith
+	 * (net.minecraft.src.EntityPlayer)
+	 */
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this) {
-			return false;
-		}
-		return entityplayer.getDistanceSq((double) xCoord + 0.5D,
-				(double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
+		return frequencer.canInteractWith(this, entityplayer);
 	}
 }

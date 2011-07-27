@@ -29,22 +29,14 @@ public class GuiWireless extends GuiContainer {
 	 */
 	@SuppressWarnings("unchecked")
 	public void initGui() {
-		controlList.add(new GuiButton(0, (width / 2) + 10, (height / 2) - 20,
-				20, 20, "+"));
-		controlList.add(new GuiButton(1, (width / 2) - 30, (height / 2) - 20,
-				20, 20, "-"));
-		controlList.add(new GuiButton(2, (width / 2) + 32, (height / 2) - 20,
-				20, 20, "+10"));
-		controlList.add(new GuiButton(3, (width / 2) - 52, (height / 2) - 20,
-				20, 20, "-10"));
-		controlList.add(new GuiButton(4, (width / 2) + 54, (height / 2) - 20,
-				26, 20, "+100"));
-		controlList.add(new GuiButton(5, (width / 2) - 80, (height / 2) - 20,
-				26, 20, "-100"));
-		controlList.add(new GuiButton(6, (width / 2) + 48, (height / 2) - 42,
-				32, 20, "+1000"));
-		controlList.add(new GuiButton(7, (width / 2) - 80, (height / 2) - 42,
-				32, 20, "-1000"));
+		controlList.add(new GuiButton(0, (width / 2) + 10, (height / 2) - 20, 20, 20, "+"));
+		controlList.add(new GuiButton(1, (width / 2) - 30, (height / 2) - 20, 20, 20, "-"));
+		controlList.add(new GuiButton(2, (width / 2) + 32, (height / 2) - 20, 20, 20, "+10"));
+		controlList.add(new GuiButton(3, (width / 2) - 52, (height / 2) - 20, 20, 20, "-10"));
+		controlList.add(new GuiButton(4, (width / 2) + 54, (height / 2) - 20, 26, 20, "+100"));
+		controlList.add(new GuiButton(5, (width / 2) - 80, (height / 2) - 20, 26, 20, "-100"));
+		controlList.add(new GuiButton(6, (width / 2) + 48, (height / 2) - 42, 32, 20, "+1000"));
+		controlList.add(new GuiButton(7, (width / 2) - 80, (height / 2) - 42, 32, 20, "-1000"));
 		super.initGui();
 	}
 
@@ -57,15 +49,10 @@ public class GuiWireless extends GuiContainer {
 		super.drawScreen(i, j, f);
 
 		GL11.glDisable(2896 /* GL_LIGHTING */);
-		drawStringBorder(
-				(width / 2)
-						- (fontRenderer.getStringWidth(tile.getFreq() + "") / 2),
-				(height / 2) - 35,
-				(width / 2)
-						+ (fontRenderer.getStringWidth(tile.getFreq() + "") / 2));
+		drawStringBorder((width / 2) - (fontRenderer.getStringWidth(tile.frequencer.getFreq() + "") / 2), (height / 2) - 35,
+				(width / 2) + (fontRenderer.getStringWidth(tile.frequencer.getFreq() + "") / 2));
 
-		fontRenderer.drawString(tile.getFreq() + "", (width / 2)
-				- (fontRenderer.getStringWidth(tile.getFreq() + "") / 2),
+		fontRenderer.drawString(tile.frequencer.getFreq() + "", (width / 2) - (fontRenderer.getStringWidth(tile.frequencer.getFreq() + "") / 2),
 				(height / 2) - 35, 0x404040);
 		GL11.glEnable(2896 /* GL_LIGHTING */);
 	}
@@ -77,8 +64,8 @@ public class GuiWireless extends GuiContainer {
 	 * net.minecraft.src.GuiScreen#actionPerformed(net.minecraft.src.GuiButton)
 	 */
 	protected void actionPerformed(GuiButton guibutton) {
-		Object a = tile.getFreq();
-		Object b = tile.getFreq();
+		Object a = tile.frequencer.getFreq();
+		Object b = tile.frequencer.getFreq();
 		int freq, oldFreq;
 		try {
 			freq = Integer.parseInt(a.toString());
@@ -119,7 +106,7 @@ public class GuiWireless extends GuiContainer {
 			freq += 10000;
 
 		if (oldFreq != freq)
-			tile.setFreq(freq);
+			tile.frequencer.setFreq(tile, freq);
 	}
 
 	/**
@@ -138,24 +125,12 @@ public class GuiWireless extends GuiContainer {
 	 * @see net.minecraft.src.GuiContainer#drawGuiContainerForegroundLayer()
 	 */
 	protected void drawGuiContainerForegroundLayer() {
-		drawStringBorder(
-				(xSize / 2)
-						- (fontRenderer.getStringWidth(tile.getInvName()) / 2),
-				6,
-				(xSize / 2)
-						+ (fontRenderer.getStringWidth(tile.getInvName()) / 2));
-		fontRenderer.drawString(tile.getInvName(),
-				(xSize / 2)
-						- (fontRenderer.getStringWidth(tile.getInvName()) / 2),
-				6, 0x404040);
+		drawStringBorder((xSize / 2) - (fontRenderer.getStringWidth(tile.getInvName()) / 2), 6, (xSize / 2)
+				+ (fontRenderer.getStringWidth(tile.getInvName()) / 2));
+		fontRenderer.drawString(tile.getInvName(), (xSize / 2) - (fontRenderer.getStringWidth(tile.getInvName()) / 2), 6, 0x404040);
 
-		drawStringBorder(
-				(xSize / 2) - (fontRenderer.getStringWidth("Frequency") / 2),
-				32, (xSize / 2)
-						+ (fontRenderer.getStringWidth("Frequency") / 2));
-		fontRenderer.drawString("Frequency",
-				(xSize / 2) - (fontRenderer.getStringWidth("Frequency") / 2),
-				32, 0x404040);
+		drawStringBorder((xSize / 2) - (fontRenderer.getStringWidth("Frequency") / 2), 32, (xSize / 2) + (fontRenderer.getStringWidth("Frequency") / 2));
+		fontRenderer.drawString("Frequency", (xSize / 2) - (fontRenderer.getStringWidth("Frequency") / 2), 32, 0x404040);
 	}
 
 	/*
@@ -166,8 +141,7 @@ public class GuiWireless extends GuiContainer {
 	 */
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f) {
-		int i = mc.renderEngine
-				.getTexture("/net/minecraft/src/WirelessRedstonePipes/gui/wifi_small.png");
+		int i = mc.renderEngine.getTexture("/net/minecraft/src/WirelessRedstonePipes/gui/wifi_small.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(i);
 		int j = (width - xSize) / 2;

@@ -82,10 +82,8 @@ public class WirelessPowerProvider extends PowerProvider {
 	 * @see net.minecraft.src.buildcraft.core.PowerProvider#configure(int, int,
 	 * int, int, int)
 	 */
-	public void configure(int latency, int minEnergyReceived,
-			int maxEnergyReceived, int minActivationEnergy, int maxStoredEnergy) {
-		super.configure(latency, minEnergyReceived, maxEnergyReceived,
-				minActivationEnergy, maxStoredEnergy);
+	public void configure(int latency, int minEnergyReceived, int maxEnergyReceived, int minActivationEnergy, int maxStoredEnergy) {
+		super.configure(latency, minEnergyReceived, maxEnergyReceived, minActivationEnergy, maxStoredEnergy);
 
 		this.minActivationEnergy = 0;
 	}
