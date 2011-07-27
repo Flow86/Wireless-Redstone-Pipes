@@ -53,7 +53,7 @@ public class BlockWirelessGoldenPipe extends BlockGoldenPipe {
 
 		IWirelessPipe tile = (IWirelessPipe) APIProxy.getWorld().getBlockTileEntity(i, j, k);
 
-		return tile.isPowered() ? activeTexture : inactiveTexture;
+		return tile.frequencer.isPowered() ? activeTexture : inactiveTexture;
 	}
 
 	/*

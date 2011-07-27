@@ -24,7 +24,7 @@ public class WirelessPowerProvider extends PowerProvider {
 	public void update(IPowerReceptor receptor) {
 		IWirelessPipe tile = (IWirelessPipe) receptor;
 
-		boolean currentPower = tile.isPowered();
+		boolean currentPower = tile.frequencer.isPowered();
 
 		if (BuildCraftCore.continuousCurrentModel) {
 			if (currentPower) {
