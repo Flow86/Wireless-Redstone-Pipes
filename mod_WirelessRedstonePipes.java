@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import java.io.File;
+
 import net.minecraft.src.WirelessRedstonePipes.BlockWirelessBouncePipe;
 import net.minecraft.src.WirelessRedstonePipes.BlockWirelessExtractionPipe;
 import net.minecraft.src.WirelessRedstonePipes.BlockWirelessGoldenPipe;
@@ -9,9 +11,6 @@ import net.minecraft.src.WirelessRedstonePipes.TileWirelessGoldenPipe;
 import net.minecraft.src.WirelessRedstonePipes.WirelessPowerFramework;
 import net.minecraft.src.buildcraft.core.Configuration;
 import net.minecraft.src.buildcraft.core.CoreProxy;
-import net.minecraft.src.buildcraft.core.PowerFramework;
-
-import java.io.File;
 
 /**
  * @author sifldoer

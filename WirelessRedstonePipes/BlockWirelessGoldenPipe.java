@@ -73,6 +73,6 @@ public class BlockWirelessGoldenPipe extends BlockGoldenPipe {
 		if (tileentity instanceof IWirelessPipe)
 			ModLoader.OpenGUI(entityplayer, new GuiWireless(entityplayer.inventory, (IWirelessPipe) tileentity));
 
-		return true;
+		return super.blockActivated(world, i, j, k, entityplayer);
 	}
 }
